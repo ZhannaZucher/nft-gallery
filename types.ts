@@ -3,7 +3,7 @@ export type Picture = {
   year: string
   photo: string
   addedDate?: number
-  id: string
+  id: number
 }
 
 export type PicturesData = {
