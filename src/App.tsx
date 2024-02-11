@@ -1,11 +1,26 @@
+import { useEffect, useState } from "react"
 import Form from "./components/Form"
+import axios from "axios"
+import PicCard from "./components/PicCard"
 
 function App() {
+  const [picsData, setPicsData] = useState([])
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/pictures")
+      .then((res) => setPicsData(res.data))
+  }, [])
+
   return (
     <>
       <h1>NFT Gallery</h1>
       <Form />
-      <div className="cards-container"></div>
+      <div className="cards-container">
+        {picsData?.map((pic, index) => (
+          <PicCard key={index} pic={pic} />
+        ))}
+      </div>
     </>
   )
 }
