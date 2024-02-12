@@ -9,6 +9,7 @@ import { Picture } from "../types"
 function App() {
   const dispatch = useAppDispatch()
   const data = useAppSelector(selectPictures)
+  console.log(data)
 
   useEffect(() => {
     axios

@@ -6,5 +6,4 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 //typed useDispatch
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 
-export const selectPictures = (state: RootState) =>
-  state.pictures?.pictures?.pictures
+export const selectPictures = (state: RootState) => state.pictures.pictures

@@ -6,6 +6,4 @@ export type Picture = {
   id: number
 }
 
-export type PicturesData = {
-  pictures: Array<Picture>
-}
+export type PicturesData = Array<Picture>
