@@ -1,8 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { PicturesData } from "../../types"
+import { Picture, PicturesData } from "../../types"
+
+type Data = {
+  pictures: Picture[]
+}
 
 type PicturesDataState = {
-  pictures: PicturesData | null
+  pictures: Data | null
 }
 
 const initialState: PicturesDataState = {
