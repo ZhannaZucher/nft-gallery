@@ -33,8 +33,16 @@ export const picturesSlice = createSlice({
         })
       }
     },
+    deletePicture: (state, action: PayloadAction<number>) => {
+      if (state.pictures) {
+        state.pictures = state.pictures.filter(
+          (pic) => pic.id !== action.payload
+        )
+      }
+    },
   },
 })
 
-export const { setPictureData, addPicture, editPicture } = picturesSlice.actions
+export const { setPictureData, addPicture, editPicture, deletePicture } =
+  picturesSlice.actions
 export default picturesSlice.reducer
