@@ -3,6 +3,8 @@ import { Picture } from "../../types"
 import Delete from "./Delete"
 import { useRef, useState } from "react"
 import axios from "axios"
+import { useAppDispatch } from "../app/selectors"
+import { editPicture } from "../feature/picturesSlice"
 
 type PicCardProps = {
   pic: Picture
@@ -11,16 +13,23 @@ type PicCardProps = {
 const PicCard = ({ pic }: PicCardProps) => {
   const [edit, setEdit] = useState(false)
   const artistInput = useRef<HTMLInputElement>(null)
+  const dispatch = useAppDispatch()
 
   const handleEdit = () => {
-    const data = {
-      artist: artistInput.current?.value,
-      year: pic.year,
-      photo: pic.photo,
-    }
+    if (artistInput.current) {
+      const data = {
+        artist: artistInput.current.value,
+        year: pic.year,
+        photo: pic.photo,
+        id: pic.id,
+      }
 
-    axios.put(`http://localhost:3000/pictures/${pic.id}`, data)
-    setEdit(!edit)
+      axios.put(`http://localhost:3000/pictures/${pic.id}`, data).then(() => {
+        dispatch(editPicture(data))
+      })
+
+      setEdit(!edit)
+    }
   }
 
   return (

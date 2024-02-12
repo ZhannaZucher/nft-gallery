@@ -19,8 +19,22 @@ export const picturesSlice = createSlice({
     addPicture: (state, action: PayloadAction<Picture>) => {
       state.pictures?.push(action.payload)
     },
+    editPicture: (state, action: PayloadAction<Picture>) => {
+      if (state.pictures) {
+        state.pictures = state.pictures.map((pic) => {
+          if (pic.id === action.payload.id) {
+            return {
+              ...pic,
+              artist: action.payload.artist,
+            }
+          } else {
+            return pic
+          }
+        })
+      }
+    },
   },
 })
 
-export const { setPictureData, addPicture } = picturesSlice.actions
+export const { setPictureData, addPicture, editPicture } = picturesSlice.actions
 export default picturesSlice.reducer
