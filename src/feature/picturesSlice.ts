@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { PicturesData } from "../../types"
+import { Picture, PicturesData } from "../../types"
 
 type PicturesDataState = {
   pictures: PicturesData | null
@@ -16,8 +16,11 @@ export const picturesSlice = createSlice({
     setPictureData: (state, action: PayloadAction<PicturesData>) => {
       state.pictures = action.payload
     },
+    addPicture: (state, action: PayloadAction<Picture>) => {
+      state.pictures?.push(action.payload)
+    },
   },
 })
 
-export const { setPictureData } = picturesSlice.actions
+export const { setPictureData, addPicture } = picturesSlice.actions
 export default picturesSlice.reducer
