@@ -3,7 +3,11 @@ import { useRef } from "react"
 import { useAppDispatch } from "../app/selectors"
 import { addPicture } from "../feature/picturesSlice"
 
-const Form = () => {
+type FormProps = {
+  getPictures: () => void
+}
+
+const Form = ({ getPictures }: FormProps) => {
   const inputArt = useRef<HTMLInputElement>(null)
   const inputYear = useRef<HTMLInputElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
@@ -21,10 +25,15 @@ const Form = () => {
         )}`,
       }
 
-      axios.post("http://localhost:3000/pictures", data).then(() => {
-        dispatch(addPicture(data))
-        formRef.current?.reset()
-      })
+      axios
+        .post("http://localhost:3000/pictures", data)
+        .then(() => {
+          dispatch(addPicture(data))
+          formRef.current?.reset()
+        })
+        .then(() => {
+          dispatch(getPictures)
+        })
     }
   }
 

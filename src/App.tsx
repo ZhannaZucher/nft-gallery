@@ -9,16 +9,22 @@ function App() {
   const dispatch = useAppDispatch()
   const data = useAppSelector(selectPictures)
 
-  useEffect(() => {
+  const getData = () => {
     axios
       .get("http://localhost:3000/pictures")
       .then((res) => dispatch(setPictureData(res.data)))
-  }, [dispatch])
+  }
+
+  useEffect(() => {
+    getData()
+    /* eslint-disable */
+  }, [])
+  /* eslint-enable */
 
   return (
     <>
       <h1>NFT Gallery</h1>
-      <Form />
+      <Form getPictures={getData} />
       <div className="cards-container">
         {data?.map((pic, index) => (
           <PicCard key={index} pic={pic} />
